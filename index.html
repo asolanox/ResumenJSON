@@ -1,0 +1,295 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: beige;
+            color: black;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: orange;
+            margin-top: 20px;
+        }
+        .container {
+            width: 80%;
+            max-width: 800px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        .button {
+            background-color: black;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .button:hover {
+            background-color: orange;
+        }
+        .navigation {
+            position: fixed;
+            left: 20px;
+            bottom: 20px;
+        }
+        .next {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+        }
+		
+		
+	
+	</style>
+</head>
+<body>
+
+<p>
+<span><i>
+	UNIVERSIDAD AUTONOMA DE SANTO DOMINGO<br>
+	Escuela de Informatica<br>
+	Alexander Solano de la Cruz,	AB5972<br>
+	<br>
+</i></span>
+  </p>
+  
+
+<br>
+
+
+<div class="container" id="content">
+    <h1>Resumen JSON</h1>
+    <div id="page"></div>
+</div>
+
+<div class="navigation">
+    <button class="button" id="back" onclick="navigate(-1)">Atrás</button>
+</div>
+<div class="next">
+    <button class="button" id="next" onclick="navigate(1)">Adelantar</button>
+</div>
+
+<script>
+    const pages = [
+        {
+            title: "JSON Introducción",
+            content: `
+			JSON (acrónimo de JavaScript Object Notation, 'notación de objeto de JavaScript') es un formato de texto sencillo para el intercambio de datos. Se trata de un subconjunto de la notación literal de objetos de JavaScript, aunque, debido a su amplia adopción como alternativa a XML, se considera un formato independiente del lenguaje.
+			<br><br>
+			Una de las supuestas ventajas de JSON sobre XML como formato de intercambio de datos es que resulta mucho más sencillo escribir un analizador sintáctico (parser) para él.
+				<br><br>
+			En JavaScript, un texto JSON se puede analizar fácilmente usando la función eval(), algo que (debido a la ubicuidad de JavaScript en casi cualquier navegador web) ha sido fundamental para que haya sido aceptado por parte de la comunidad de desarrolladores AJAX
+				<br><br>
+			
+			
+			`
+		},
+        {
+            title: "JSON Introduccion (continuacion)",
+            content: `
+			En la práctica, los argumentos a favor de la facilidad de desarrollo de analizadores o de sus rendimientos son poco relevantes, debido a las cuestiones de seguridad que plantea el uso de eval() y el auge del procesamiento nativo de XML incorporado en los navegadores modernos.
+			   <br><br>
+			Por esa razón, JSON se emplea habitualmente en entornos donde el tamaño del flujo de datos entre cliente y servidor es de vital importancia. De aquí su uso por Yahoo!, Google, Mozilla, etc, que atienden a millones de usuarios, cuando la fuente de datos es explícitamente de fiar y donde no es importante el hecho de no disponer de procesamiento XSLT para manipular los datos en el cliente. 
+			
+          `
+        },
+        {
+            title: "SINTAXIS ",
+            content: ` 
+			Los tipos de datos disponibles con JSON son:
+	    <br><br>
+    Números: Se permiten números negativos y opcionalmente pueden contener parte fraccional separada por puntos. Ejemplo: 123.456
+    <br><br>
+	
+	Cadenas: Representan secuencias de cero o más caracteres. Se ponen entre doble comilla y se permiten cadenas de escape. Ejemplo: "Hola"
+        <br><br>
+	Booleanos: Representan valores booleanos y pueden tener dos valores: true y false
+        <br><br>
+	null: Representan el valor nulo.
+        <br><br>
+	Array: Representa una lista ordenada de cero o más valores los cuales pueden ser de cualquier tipo. Los valores se separan por comas y el vector se mete entre corchetes. Ejemplo ["juan","pedro","jacinto"]
+        <br><br>
+	Objetos: Son colecciones no ordenadas de pares de la forma <nombre>:<valor> separados por comas y puestas entre llaves. El nombre tiene que ser una cadena entre comillas dobles. El valor puede ser de cualquier tipo. 
+           `
+        },
+        {
+            title: "Ejemplo SINTAXIS ",
+            content: ` 
+			<pre>
+			{
+  "departamento":d8,
+  "nombredepto":"Ventas",
+  "director": "Juan Rodríguez",
+  "empleados":[
+    {
+      "nombre":"Pedro",
+      "apellido":"Fernández"
+    },{
+      "nombre":"Jacinto",
+      "apellido":"Benavente"
+    } 
+  ]
+}
+			</pre>
+			
+			
+            `
+        },
+        {
+            title: "Modelos de Procesamiento",
+            content: `
+			Dado que el JSON es ampliamente utilizado para el intercambio de datos, se han desarrollado APIs para diversos lenguajes de programación, como ActionScript, C, C++, C#, ColdFusion, Common Lisp, Delphi, E, Eiffel, Java, JavaScript, ML, Objective-C, Objective CAML, Perl, PHP, Python, Rebol, Ruby, Lua y Visual FoxPro.
+	<br><br>
+	Los modelos de programación más comunes para manipular JSON en diferentes lenguajes incluyen:10​
+	<br><br>
+    Modelo de objeto: En este enfoque, el JSON completo se almacena en memoria en forma de árbol, lo que permite navegar, analizar y modificar el contenido utilizando las API adecuadas. Aunque este modelo consume más recursos al cargar todo en memoria, es altamente flexible para la manipulación de datos. Ejemplos de implementación incluyen la JSR 353 y la biblioteca Jackson en Java.
+	<br><br>
+    Modelo de flujo: Aquí, los datos se leen o escriben en bloques, generando eventos apropiados para indicar el tipo de bloque durante el proceso de lectura. El cliente puede procesar el contenido escuchando estos eventos, lo que le permite controlar cómo se lee el JSON, incluyendo la posibilidad de detener o saltar contenido durante el proceso. Este modelo también está permitido en Java a través de la JSR 353.
+	<br><br>
+    Conversión de objetos JSON a objetos del lenguaje: En este caso, las bibliotecas como Jackson y Gson en Java se encargan de convertir los objetos JSON en objetos del lenguaje de programación utilizado.
+			
+             `
+        },
+        {
+            title: "USO DE JSON",
+            content: `
+			En teoría, es trivial analizar JSON en JavaScript usando la función JSON.parse() incorporada en el lenguaje. Por ejemplo:
+			<br><br>
+			miObjeto = JSON.parse(json_datos);
+			<br><br>
+			En la práctica, las consideraciones de seguridad por lo general recomiendan no usar eval sobre datos crudos y debería usarse un analizador JavaScript distinto para garantizar la seguridad. El analizador proporcionado por JSON.org usa eval() en su función de análisis, protegiéndola con una expresión regular de forma que la función sólo ve expresiones seguras. 
+			
+            `
+        },
+        {
+            title: " Ejemplo de uso de JSON ",
+            content: ` 
+			Un ejemplo de acceso a datos JSON usando XMLHttpRequest es: 
+			<pre>
+			var http_request = new XMLHttpRequest();
+			var url = "http://example.net/jsondata.php"; // Esta URL debería devolver datos JSON
+ 
+				// Descarga los datos JSON del servidor.
+				http_request.onreadystatechange = handle_json;
+				http_request.open("GET", url, true);
+				http_request.send(null);
+				 
+				function handle_json() {
+				  if (http_request.readyState == 4) {
+					if (http_request.status == 200) {
+					  var json_data = http_request.responseText; 
+					  var the_object = eval("(" + json_data + ")");
+					} else {
+					  alert("Ocurrió un problema con la URL.");
+					}
+					http_request = null;
+				  }
+				}
+			
+				</pre>
+           `
+        },
+        <!-- }, --> 
+        
+        { 
+            title: "Ejemplo de JSON", 
+            content: `  
+			<pre>
+							{
+					"menu": {
+						"id": "file",
+						"value": "File",
+						"popup": {
+							"menuitems": [
+								{
+									"value": "New", "onclick": "CreateNewDoc()"
+								},{
+									"value": "Open", "onclick": "OpenDoc()"
+								},{
+									"value": "Close", "onclick": "CloseDoc()"
+								}
+							]
+						}
+					}
+				}
+			
+
+	
+			</pre>
+		
+		
+				` 
+        }, 
+		
+		{ 
+             title: "Comparación con XML y otros lenguajes de marcado", 
+             content: `  
+					
+		Hay muchos analizadores JSON en el lado del servidor, existiendo al menos un analizador para la mayoría de los entornos. En algunos lenguajes, como Java o PHP, hay diferentes implementaciones donde escoger. En JavaScript, el análisis es posible de manera nativa con la función JSON.parse(). Ambos formatos carecen de un mecanismo para representar grandes objetos binarios.
+		<br><br>
+		Con independencia de la comparación con XML, JSON puede ser muy compacto y eficiente si se usa de manera efectiva. Por ejemplo, la aplicación DHTML de búsqueda en «BarracudaDrive» (en inglés). Archivado desde el original el 21 de mayo de 2006. recibe los listados de directorio como JSON desde el servidor. Esta aplicación de búsqueda está permanentemente consultando al servidor por nuevos directorios, y es notablemente rápida, incluso sobre una conexión lenta.
+		<br><br>
+		Los entornos en el servidor normalmente requieren que se incorpore una función u objeto analizador de JSON. Algunos programadores, especialmente los familiarizados con el lenguaje C, encuentran JSON más natural que XML, pero otros desarrolladores encuentran su escueta notación algo confusa, especialmente cuando se trata de datos fuertemente jerarquizados o anidados muy profundamente.
+		<br><br>
+		Hay más comparaciones entre JSON y XML en JSON.org
+		<br><br>
+		YAML es un superconjunto de JSON que trata de superar algunas de las limitaciones de este. Aunque es significativamente más complejo,​ todavía puede considerarse como ligero. El lenguaje de programación Ruby utiliza YAML como el formato de serialización por defecto. Así pues, es posible manejar JSON con bastante sencillez. 			
+
+            ` 
+        } 
+    ];
+
+    let currentPage = 0;
+
+    function loadPage() {
+        const pageDiv = document.getElementById('page');
+        const { title, content } = pages[currentPage];
+
+        pageDiv.innerHTML = `<h2>${title}</h2>${content}`;
+
+        // Actualizar visibilidad de botones
+        document.getElementById('back').style.display = currentPage === 0 ? 'none' : 'block';
+        document.getElementById('next').innerText = currentPage === pages.length - 1 ? 'Cerrar Aplicación' : 'Adelantar';
+    }
+
+    function navigate(direction) {
+        if (direction === 1) {
+            if (currentPage === pages.length - 1) {
+                window.close(); // Cierra la ventana si es la última página
+            } else {
+                currentPage++;
+            }
+        } else {
+            currentPage--;
+        }
+        loadPage();
+    }
+
+    // Cargar la página inicial
+    loadPage();
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
